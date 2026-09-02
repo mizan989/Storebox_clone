@@ -1,8 +1,8 @@
 {
-  "name": "storebox",
+  "name": "storebox-clone",
   "version": "1.0.0",
   "private": true,
-  "description": "Storebox — Done-for-you website in 24 hours",
+  "description": "Done-for-you digital marketing, website, and SEO/AEO platform with cinematic GSAP ScrollTrigger animation, Lenis smooth scrolling, and Formspree draft request modal.",
   "type": "module",
   "scripts": {
     "dev": "vite",
