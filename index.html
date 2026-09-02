@@ -1139,13 +1139,10 @@ header.MuiAppBar-root a.MuiButton-containedPrimary:hover {
   .why-card p{font-size:14px}
   .nocatch-foot{text-align:center;margin-top:36px;font-size:15px;color:var(--text);font-weight:600}
   .nocatch-foot span{color:#0FA88F}
-  .sticky-cta{position:fixed;left:12px;right:12px;bottom:12px;z-index:65;display:none}
-  .sticky-cta .btn{width:100%;padding:15px 20px;font-size:15.5px;
-    box-shadow:0 14px 44px rgba(255,107,44,.55)}
-  @media(max-width:920px){.sticky-cta{display:block}}
+  .sticky-cta{display:none !important}
   /* ---------- free draft section ---------- */
   .free-draft-sec{position:relative}
-  .free-draft-layout{display:grid;grid-template-columns:1fr 1.15fr;gap:56px;align-items:start}
+  .free-draft-layout{display:grid;grid-template-columns:1fr 1.05fr;gap:56px;align-items:center}
   @media(max-width:960px){.free-draft-layout{grid-template-columns:1fr;gap:44px}}
   .free-draft-info h2{font-size:clamp(30px,4vw,48px);margin:16px 0 18px;line-height:1.15}
   .free-draft-info .draft-sub{font-size:16px;color:var(--muted);line-height:1.65;margin:0 0 32px}
@@ -1159,32 +1156,82 @@ header.MuiAppBar-root a.MuiButton-containedPrimary:hover {
   .draft-direct-card .dd-title{font-size:13px;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.05em;font-weight:600}
   .dd-wa-btn{display:inline-flex;align-items:center;gap:10px;color:#2BD4BD;font-weight:600;font-size:15px;text-decoration:none;transition:all .2s ease}
   .dd-wa-btn:hover{color:#5cf8e2;transform:translateX(3px)}
-  .form-card-inner{background:#FFFFFF;border-radius:24px;padding:38px 34px;box-shadow:0 30px 80px rgba(0,0,0,.4),0 0 0 1px rgba(255,255,255,.1);color:#221D15}
-  @media(max-width:600px){.form-card-inner{padding:26px 20px;border-radius:18px}}
-  .form-card-head h3{font-family:var(--fh);font-size:24px;font-weight:700;color:#221D15;margin:0 0 6px}
-  .form-card-head p{font-size:14px;color:#6E6557;margin:0 0 24px;line-height:1.5}
-  .formspree-draft-form{display:flex;flex-direction:column;gap:16px}
+
+  /* Right CTA Preview Box (replaces inline form on landing page) */
+  .draft-preview-inner{background:rgba(250,240,225,.04);border:1px solid var(--line);border-radius:24px;padding:40px 36px;box-shadow:0 24px 60px rgba(0,0,0,.35)}
+  @media(max-width:600px){.draft-preview-inner{padding:28px 22px;border-radius:20px}}
+  .dp-spark-badge{display:inline-flex;align-items:center;gap:8px;padding:5px 14px;background:rgba(15,168,143,.14);border:1px solid rgba(15,168,143,.28);border-radius:999px;color:#2BD4BD;font-size:12.5px;font-weight:600;margin-bottom:18px}
+  .dp-spark-dot{width:6px;height:6px;border-radius:50%;background:#0FA88F}
+  .dp-title{font-family:var(--fh);font-size:clamp(22px,2.5vw,28px);font-weight:700;color:var(--text);margin:0 0 12px;letter-spacing:-.015em}
+  .dp-desc{font-size:15px;color:var(--muted);line-height:1.6;margin:0 0 24px}
+  .dp-highlights{display:flex;flex-direction:column;gap:12px;margin-bottom:28px;padding:18px 20px;background:rgba(250,240,225,.03);border:1px dashed rgba(250,240,225,.12);border-radius:14px}
+  .dp-item{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text);font-weight:500}
+  .dp-check{color:#2BD4BD;font-weight:700}
+  .draft-primary-cta-btn{width:100%;padding:16px 24px;background:linear-gradient(100deg,#FFA149,#FF6B2C 60%,#F5522F);color:#FFFFFF;border:none;border-radius:14px;font-family:var(--fb);font-size:16px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 10px 28px rgba(255,107,44,.4);transition:all .2s cubic-bezier(.16,1,.3,1)}
+  .draft-primary-cta-btn:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(255,107,44,.52);filter:brightness(1.05)}
+  .draft-primary-cta-btn:active{transform:translateY(0)}
+  .dp-sub-note{text-align:center;font-size:12.5px;color:var(--muted);margin-top:12px}
+
+  /* ============ HOVERING BUTTON ON BOTTOM RIGHT (FAB) ============ */
+  .draft-fab-btn{position:fixed;right:24px;bottom:24px;z-index:998;display:inline-flex;align-items:center;gap:10px;padding:12px 20px 12px 16px;background:rgba(22,18,14,.92);border:1.5px solid rgba(255,107,44,.4);border-radius:999px;color:#FAF7F1;font-family:var(--fb);font-size:14.5px;font-weight:600;letter-spacing:-.01em;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,.55),0 0 20px rgba(255,107,44,.2);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);transition:all .25s cubic-bezier(.16,1,.3,1);user-select:none;-webkit-tap-highlight-color:transparent}
+  .draft-fab-btn:hover{transform:translateY(-3px) scale(1.02);background:#1E1813;border-color:#FF6B2C;box-shadow:0 14px 38px rgba(0,0,0,.65),0 0 26px rgba(255,107,44,.4);color:#FFFFFF}
+  .draft-fab-btn:active{transform:translateY(0) scale(0.98)}
+  .draft-fab-dot{width:8px;height:8px;border-radius:50%;background:#FF6B2C;box-shadow:0 0 8px #FF6B2C;position:relative;flex-shrink:0}
+  .draft-fab-dot::after{content:'';position:absolute;inset:-3px;border-radius:50%;border:1px solid #FF6B2C;animation:fabDotPulse 2s infinite cubic-bezier(.25,1,.5,1)}
+  @keyframes fabDotPulse{0%{transform:scale(.8);opacity:.9}100%{transform:scale(2.2);opacity:0}}
+  .draft-fab-icon{color:#FFA149;flex-shrink:0;display:inline-flex;align-items:center}
+  .draft-fab-label{white-space:nowrap}
+  @media(max-width:640px){.draft-fab-btn{right:16px;bottom:18px;padding:10px 16px 10px 13px;font-size:13.5px;gap:8px}}
+
+  html.modal-open, body.modal-open{overflow:hidden !important;touch-action:none}
+  /* ============ DRAFT MODAL DIALOG ============ */
+  dialog.draft-modal{border:none;background:transparent;padding:0;margin:auto;max-width:620px;width:calc(100vw - 32px);max-height:90vh;outline:none;overflow:hidden;color:#221D15;box-sizing:border-box;z-index:1200}
+  dialog.draft-modal::backdrop{background:rgba(10,8,6,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);animation:draftBackdropFadeIn .22s ease-out}
+  @keyframes draftBackdropFadeIn{from{opacity:0}to{opacity:1}}
+  dialog.draft-modal[open]{animation:draftModalPop .28s cubic-bezier(.16,1,.3,1)}
+  @keyframes draftModalPop{from{opacity:0;transform:scale(.95) translateY(14px)}to{opacity:1;transform:scale(1) translateY(0)}}
+  .draft-modal-box{background:#FFFFFF;border-radius:24px;padding:32px 34px 28px;position:relative;box-shadow:0 30px 80px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.12);max-height:90vh;overflow-y:auto !important;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;touch-action:pan-y}
+  .draft-modal-box::-webkit-scrollbar{width:6px}
+  .draft-modal-box::-webkit-scrollbar-track{background:transparent}
+  .draft-modal-box::-webkit-scrollbar-thumb{background:rgba(34,29,21,.2);border-radius:999px}
+  .draft-modal-box::-webkit-scrollbar-thumb:hover{background:rgba(34,29,21,.38)}
+  @media(max-width:600px){.draft-modal-box{padding:24px 18px 20px;border-radius:18px}.modal-form-grid{grid-template-columns:1fr !important;gap:14px !important}}
+  .draft-modal-close{position:absolute;top:18px;right:18px;width:34px;height:34px;border-radius:50%;border:1px solid #E6DFD5;background:#FAF7F1;color:#6E6557;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s ease;z-index:10;padding:0}
+  .draft-modal-close:hover{background:#EFE8DC;color:#1A1612;transform:rotate(90deg)}
+  .modal-badge-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+  .modal-pill-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 11px;background:rgba(15,168,143,.12);border:1px solid rgba(15,168,143,.25);border-radius:999px;color:#0B7A68;font-size:12px;font-weight:700}
+  .modal-pill-badge .pill-dot{width:6px;height:6px;border-radius:50%;background:#0FA88F}
+  .modal-micro-tag{font-size:12px;color:#8C8477;font-weight:500}
+  .draft-modal-header h3{font-family:var(--fh);font-size:24px;font-weight:700;color:#221D15;margin:0 0 6px;letter-spacing:-.015em}
+  .modal-subtext{font-size:14px;color:#6E6557;margin:0 0 20px;line-height:1.5}
+  .modal-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .modal-wa-prompt{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:14px;font-size:13px;color:#6E6557;text-align:center;flex-wrap:wrap}
+  .modal-wa-prompt a{color:#0FA88F;text-decoration:none;font-weight:600;transition:color .15s ease}
+  .modal-wa-prompt a:hover{color:#0A7362;text-decoration:underline}
+
+  /* Formspree Form inside modal */
+  .formspree-draft-form{display:flex;flex-direction:column;gap:15px}
   .form-field{display:flex;flex-direction:column;gap:6px}
-  .form-field label{font-size:13.5px;font-weight:600;color:#221D15}
+  .form-field label{font-size:13px;font-weight:600;color:#221D15}
   .form-field label .req{color:#FF6B2C}
   .field-label-row{display:flex;justify-content:space-between;align-items:center}
-  .opt-tag{font-size:11.5px;color:#8C8477}
+  .opt-tag{font-size:11px;color:#8C8477}
   .opt-tag.highlight{color:#0FA966;font-weight:600}
   .form-field input[type="text"],.form-field input[type="email"],.form-field input[type="tel"],.form-field textarea{
-    width:100%;padding:12px 16px;font-family:var(--fb);font-size:14.5px;color:#221D15;background:#FAF7F1;
-    border:1.5px solid #E6DFD5;border-radius:12px;outline:none;box-sizing:border-box;transition:all .2s ease}
-  .form-field input:focus,.form-field textarea:focus{border-color:#FF6B2C;background:#FFFFFF;box-shadow:0 0 0 3.5px rgba(255,107,44,.15)}
+    width:100%;padding:11px 14px;font-family:var(--fb);font-size:14px;color:#221D15;background:#FAF7F1;
+    border:1.5px solid #E6DFD5;border-radius:11px;outline:none;box-sizing:border-box;transition:all .2s ease}
+  .form-field input:focus,.form-field textarea:focus{border-color:#FF6B2C;background:#FFFFFF;box-shadow:0 0 0 3px rgba(255,107,44,.15)}
   .section-sublabel{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#6E6557}
   .interest-chips{display:flex;flex-wrap:wrap;gap:8px}
-  .interest-chip{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;background:#FAF7F1;
-    border:1.5px solid #E6DFD5;border-radius:10px;cursor:pointer;font-size:13.5px;color:#221D15;font-weight:500;transition:all .15s ease;user-select:none}
-  .interest-chip input{accent-color:#FF6B2C;width:15px;height:15px;cursor:pointer}
+  .interest-chip{display:inline-flex;align-items:center;gap:7px;padding:7px 13px;background:#FAF7F1;
+    border:1.5px solid #E6DFD5;border-radius:9px;cursor:pointer;font-size:13px;color:#221D15;font-weight:500;transition:all .15s ease;user-select:none}
+  .interest-chip input{accent-color:#FF6B2C;width:14px;height:14px;cursor:pointer}
   .interest-chip:hover{border-color:#FF6B2C;background:#FFF3EC}
-  .consent-label{display:flex;align-items:flex-start;gap:10px;font-size:11.5px;line-height:1.45;color:#6E6557;cursor:pointer;margin-top:2px}
-  .consent-label input{accent-color:#FF6B2C;width:15px;height:15px;margin-top:2px;flex-shrink:0;cursor:pointer}
-  .draft-submit-btn{width:100%;padding:15px 24px;background:linear-gradient(100deg,#FFA149,#FF6B2C 60%,#F5522F);
-    color:#FFFFFF;border:none;border-radius:12px;font-family:var(--fb);font-size:16px;font-weight:600;
-    cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:6px;
+  .consent-label{display:flex;align-items:flex-start;gap:9px;font-size:11px;line-height:1.45;color:#6E6557;cursor:pointer;margin-top:2px}
+  .consent-label input{accent-color:#FF6B2C;width:14px;height:14px;margin-top:2px;flex-shrink:0;cursor:pointer}
+  .draft-submit-btn{width:100%;padding:14px 22px;background:linear-gradient(100deg,#FFA149,#FF6B2C 60%,#F5522F);
+    color:#FFFFFF;border:none;border-radius:12px;font-family:var(--fb);font-size:15.5px;font-weight:600;
+    cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:4px;
     box-shadow:0 8px 24px rgba(255,107,44,.35);transition:all .2s ease}
   .draft-submit-btn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(255,107,44,.45);filter:brightness(1.05)}
   .draft-submit-btn:active{transform:translateY(0)}
@@ -1306,7 +1353,7 @@ header.MuiAppBar-root a.MuiButton-containedPrimary:hover {
           <span class="chip"><span class="tick">✓</span>Free draft · No credit card</span>
           <span class="chip"><span class="tick">✓</span>No calls</span>
         </div>
-        <a class="btn fb4-btn" href="#free-draft">Get my free draft →</a>
+        <a class="btn fb4-btn" href="#free-draft" data-open-draft-modal>Get my free draft →</a>
       </div>
       <div class="scroll-hint" id="scrollHint">Scroll to watch<span class="sh-arrow">↓</span></div>
     </div>
@@ -1673,7 +1720,7 @@ header.MuiAppBar-root a.MuiButton-containedPrimary:hover {
           <li><span class="tick">✓</span>Maintenance &amp; security</li>
           <li><span class="tick">✓</span>CRM, analytics, scheduling built in</li>
         </ul>
-        <a class="btn ghost" href="#free-draft">Get my free draft</a>
+        <a class="btn ghost" href="#free-draft" data-open-draft-modal>Get my free draft</a>
       </div>
       <div class="pcard pop">
         <span class="pop-tag">Most popular</span>
@@ -1687,7 +1734,7 @@ header.MuiAppBar-root a.MuiButton-containedPrimary:hover {
           <li><span class="tick">✓</span>Orders, receipts, taxes</li>
           <li><span class="tick">✓</span>Product pages written for you</li>
         </ul>
-        <a class="btn" href="#free-draft">Get my free draft</a>
+        <a class="btn" href="#free-draft" data-open-draft-modal>Get my free draft</a>
       </div>
       <div class="pcard">
         <h3>Get Found</h3>
@@ -1700,7 +1747,7 @@ header.MuiAppBar-root a.MuiButton-containedPrimary:hover {
           <li><span class="tick">✓</span>Content &amp; landing pages</li>
           <li><span class="tick">✓</span>Rank tracking &amp; reporting</li>
         </ul>
-        <a class="btn ghost" href="#free-draft">Get my free draft</a>
+        <a class="btn ghost" href="#free-draft" data-open-draft-modal>Get my free draft</a>
       </div>
       <div class="pcard ent">
         <h3>Enterprise</h3>
@@ -1712,11 +1759,11 @@ header.MuiAppBar-root a.MuiButton-containedPrimary:hover {
           <li><span class="tick">✓</span>AEO strategy &amp; execution</li>
           <li><span class="tick">✓</span>Dedicated team</li>
         </ul>
-        <a class="btn ghost" href="#free-draft">Contact us</a>
+        <a class="btn ghost" href="#free-draft" data-open-draft-modal>Contact us</a>
       </div>
     </div>
     <div class="sec-actions rv">
-      <a class="btn" href="#free-draft">Get my free draft →</a>
+      <a class="btn" href="#free-draft" data-open-draft-modal>Get my free draft →</a>
       <a class="btn ghost" href="/pricing.html">Compare all plans →</a>
     </div>
   </div>
@@ -1802,112 +1849,175 @@ header.MuiAppBar-root a.MuiButton-containedPrimary:hover {
         </div>
       </div>
 
-      <!-- Right Form Card Column -->
-      <div class="free-draft-form-box rv">
-        <div class="form-card-inner">
-          <div class="form-card-head">
-            <h3>Get your free draft site</h3>
-            <p>Tell us about your business. We'll send your live preview link within 24 hours.</p>
+      <!-- Right CTA Preview Card Column (Inline form replaced with bottom-right floating modal) -->
+      <div class="free-draft-preview-box rv">
+        <div class="draft-preview-inner">
+          <div class="dp-spark-badge">
+            <span class="dp-spark-dot"></span>
+            <span>24-Hour Free Draft</span>
+          </div>
+          <h3 class="dp-title">Ready to see your business live?</h3>
+          <p class="dp-desc">
+            Skip the lengthy sales pitches and agency decks. Request your free preview draft, and our team will build and deliver your high-speed live site within 24 hours.
+          </p>
+
+          <div class="dp-highlights">
+            <div class="dp-item">
+              <span class="dp-check">✓</span>
+              <span>100% Free &amp; Zero Financial Risk</span>
+            </div>
+            <div class="dp-item">
+              <span class="dp-check">✓</span>
+              <span>No credit card or commitment required</span>
+            </div>
+            <div class="dp-item">
+              <span class="dp-check">✓</span>
+              <span>Keep it from ₹799/mo or walk away freely</span>
+            </div>
           </div>
 
-          <form id="storeboxDraftForm" action="https://formspree.io/f/your-form-id" method="POST" class="formspree-draft-form">
-            <!-- Name Field -->
-            <div class="form-field">
-              <label for="main-sb-name">Your name <span class="req">*</span></label>
-              <input type="text" id="main-sb-name" name="name" required placeholder="e.g. Alex Morgan" autocomplete="name" />
-            </div>
-
-            <!-- Business Name Field -->
-            <div class="form-field">
-              <label for="main-sb-biz">Business name <span class="req">*</span></label>
-              <input type="text" id="main-sb-biz" name="businessName" required placeholder="e.g. Acme Studio or Artisan Cafe" />
-            </div>
-
-            <!-- Website or Social Link -->
-            <div class="form-field">
-              <div class="field-label-row">
-                <label for="main-sb-site">Website or social link</label>
-                <span class="opt-tag">Optional</span>
-              </div>
-              <input type="text" id="main-sb-site" name="website" placeholder="e.g. instagram.com/mybrand or current-site.com" />
-            </div>
-
-            <!-- Location -->
-            <div class="form-field">
-              <div class="field-label-row">
-                <label for="main-sb-loc">Location</label>
-                <span class="opt-tag">Optional</span>
-              </div>
-              <input type="text" id="main-sb-loc" name="location" placeholder="e.g. Mumbai, India or Delhi NCR" />
-            </div>
-
-            <!-- Description -->
-            <div class="form-field">
-              <div class="field-label-row">
-                <label for="main-sb-desc">One-line description</label>
-                <span class="opt-tag">Optional</span>
-              </div>
-              <textarea id="main-sb-desc" name="description" rows="2" placeholder="e.g. Specialty coffee shop, dental clinic, or clothing brand"></textarea>
-            </div>
-
-            <!-- Interests -->
-            <div class="form-field">
-              <label class="section-sublabel">What are you interested in?</label>
-              <div class="interest-chips">
-                <label class="interest-chip">
-                  <input type="checkbox" name="interest_website" checked />
-                  <span>Website</span>
-                </label>
-                <label class="interest-chip">
-                  <input type="checkbox" name="interest_ecommerce" />
-                  <span>Ecommerce Store</span>
-                </label>
-                <label class="interest-chip">
-                  <input type="checkbox" name="interest_seo" checked />
-                  <span>SEO / AEO</span>
-                </label>
-              </div>
-            </div>
-
-            <!-- Email Field -->
-            <div class="form-field">
-              <div class="field-label-row">
-                <label for="main-sb-email">Email</label>
-                <span class="opt-tag">Optional if WhatsApp given</span>
-              </div>
-              <input type="email" id="main-sb-email" name="email" placeholder="e.g. contact@yourbusiness.com" autocomplete="email" />
-            </div>
-
-            <!-- Phone / WhatsApp Field -->
-            <div class="form-field">
-              <div class="field-label-row">
-                <label for="main-sb-phone">Phone / WhatsApp number</label>
-                <span class="opt-tag highlight">Recommended for instant preview</span>
-              </div>
-              <input type="tel" id="main-sb-phone" name="phone" placeholder="e.g. +91 98765 43210" autocomplete="tel" />
-            </div>
-
-            <!-- Consent -->
-            <label class="consent-label">
-              <input type="checkbox" name="consent" checked />
-              <span>By submitting, you consent to receive draft previews, updates, and messages from Storebox regarding your inquiry. No spam ever.</span>
-            </label>
-
-            <!-- Submit Button -->
-            <button type="submit" class="draft-submit-btn">
-              <span>Get My Free Draft</span>
-              <span class="btn-arrow">→</span>
-            </button>
-          </form>
+          <button type="button" class="draft-primary-cta-btn" data-open-draft-modal>
+            <span>Request Free Draft (24h)</span>
+            <span class="btn-arrow">→</span>
+          </button>
+          <div class="dp-sub-note">Takes under 60 seconds • Direct response via WhatsApp or Email</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<div class="sticky-cta" id="stickyCta">
-  <a class="btn" href="#free-draft" data-sb-var="sticky_cta">Free draft in 24h — from ₹799/mo →</a>
-</div>
+<!-- ============ HOVERING ACTION BUTTON (BOTTOM RIGHT) ============ -->
+<button type="button" class="draft-fab-btn" id="draftFabBtn" data-open-draft-modal aria-label="Get Free Draft Website" title="Get Free Draft in 24 Hours">
+  <span class="draft-fab-dot" aria-hidden="true"></span>
+  <svg class="draft-fab-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+  </svg>
+  <span class="draft-fab-label">Get Free Draft</span>
+</button>
+
+<!-- ============ FORMSPREE MODAL DIALOG ============ -->
+<dialog id="draftModal" class="draft-modal" closedby="any" data-lenis-prevent="true" aria-labelledby="draftModalTitle">
+  <div class="draft-modal-box" data-lenis-prevent="true">
+    <!-- Close Button -->
+    <button type="button" class="draft-modal-close" id="closeDraftModal" aria-label="Close dialog">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+
+    <!-- Modal Header -->
+    <div class="draft-modal-header">
+      <div class="modal-badge-row">
+        <span class="modal-pill-badge"><span class="pill-dot"></span>24-Hour Free Draft</span>
+        <span class="modal-micro-tag">Zero Risk • No Credit Card</span>
+      </div>
+      <h3 id="draftModalTitle">Get your free draft site</h3>
+      <p class="modal-subtext">Tell us about your business. We'll send your live preview link within 24 hours.</p>
+    </div>
+
+    <!-- Formspree Form -->
+    <form id="storeboxDraftForm" action="https://formspree.io/f/your-form-id" method="POST" class="formspree-draft-form">
+      <!-- Name & Business Name -->
+      <div class="modal-form-grid">
+        <div class="form-field">
+          <label for="modal-sb-name">Your name <span class="req">*</span></label>
+          <input type="text" id="modal-sb-name" name="name" required placeholder="e.g. Alex Morgan" autocomplete="name" />
+        </div>
+
+        <div class="form-field">
+          <label for="modal-sb-biz">Business name <span class="req">*</span></label>
+          <input type="text" id="modal-sb-biz" name="businessName" required placeholder="e.g. Acme Studio or Artisan Cafe" />
+        </div>
+      </div>
+
+      <!-- Phone & Email -->
+      <div class="modal-form-grid">
+        <div class="form-field">
+          <div class="field-label-row">
+            <label for="modal-sb-phone">Phone / WhatsApp <span class="req">*</span></label>
+            <span class="opt-tag highlight">Instant preview link</span>
+          </div>
+          <input type="tel" id="modal-sb-phone" name="phone" required placeholder="e.g. +91 98765 43210" autocomplete="tel" />
+        </div>
+
+        <div class="form-field">
+          <div class="field-label-row">
+            <label for="modal-sb-email">Email</label>
+            <span class="opt-tag">Optional</span>
+          </div>
+          <input type="email" id="modal-sb-email" name="email" placeholder="e.g. contact@business.com" autocomplete="email" />
+        </div>
+      </div>
+
+      <!-- Website / Social & Location -->
+      <div class="modal-form-grid">
+        <div class="form-field">
+          <div class="field-label-row">
+            <label for="modal-sb-site">Current website / social</label>
+            <span class="opt-tag">Optional</span>
+          </div>
+          <input type="text" id="modal-sb-site" name="website" placeholder="e.g. instagram.com/mybrand" />
+        </div>
+
+        <div class="form-field">
+          <div class="field-label-row">
+            <label for="modal-sb-loc">Location / City</label>
+            <span class="opt-tag">Optional</span>
+          </div>
+          <input type="text" id="modal-sb-loc" name="location" placeholder="e.g. Mumbai, Delhi NCR" />
+        </div>
+      </div>
+
+      <!-- Interests -->
+      <div class="form-field">
+        <label class="section-sublabel">What are you interested in?</label>
+        <div class="interest-chips">
+          <label class="interest-chip">
+            <input type="checkbox" name="interest_website" checked />
+            <span>Website</span>
+          </label>
+          <label class="interest-chip">
+            <input type="checkbox" name="interest_ecommerce" />
+            <span>Ecommerce Store</span>
+          </label>
+          <label class="interest-chip">
+            <input type="checkbox" name="interest_seo" checked />
+            <span>SEO / AEO</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Description -->
+      <div class="form-field">
+        <div class="field-label-row">
+          <label for="modal-sb-desc">About your business</label>
+          <span class="opt-tag">Optional</span>
+        </div>
+        <textarea id="modal-sb-desc" name="description" rows="2" placeholder="e.g. Specialty coffee shop, dental clinic, or retail fashion brand"></textarea>
+      </div>
+
+      <!-- Consent -->
+      <label class="consent-label">
+        <input type="checkbox" name="consent" checked />
+        <span>By submitting, you consent to receive draft previews, updates, and messages from Storebox regarding your inquiry. No spam ever.</span>
+      </label>
+
+      <!-- Submit Button -->
+      <button type="submit" class="draft-submit-btn">
+        <span>Get My Free Draft</span>
+        <span class="btn-arrow">→</span>
+      </button>
+
+      <!-- Direct WhatsApp quick link inside modal -->
+      <div class="modal-wa-prompt">
+        <span>Prefer to talk directly?</span>
+        <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer">WhatsApp Alex Morgan (+91 98765 43210) →</a>
+      </div>
+    </form>
+  </div>
+</dialog>
 
 
 
@@ -1963,7 +2073,7 @@ header.MuiAppBar-root a.MuiButton-containedPrimary:hover {
         <a href="/pricing.html" style="color:#FAF7F1; text-decoration:none; font-size:14px; transition:color .2s ease;">Pricing</a>
         <a href="/ecommerce.html" style="color:#FAF7F1; text-decoration:none; font-size:14px; transition:color .2s ease;">E-commerce</a>
         <a href="/aeo-geo-seo.html" style="color:#FAF7F1; text-decoration:none; font-size:14px; transition:color .2s ease;">SEO &amp; AEO</a>
-        <a href="#free-draft" style="color:#FF8749; text-decoration:none; font-size:14px; font-weight:600; transition:color .2s ease;">Get Free Draft →</a>
+        <a href="#free-draft" data-open-draft-modal style="color:#FF8749; text-decoration:none; font-size:14px; font-weight:600; transition:color .2s ease;">Get Free Draft →</a>
       </div>
       <div>
         <a href="mailto:hello@example.com" style="display:inline-flex; align-items:center; gap:6px; color:#A99E8F; text-decoration:none; font-size:13.5px; transition:color .2s ease;">

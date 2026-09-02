@@ -246,16 +246,21 @@
 
           if (response.ok) {
             form.innerHTML = `
-              <div style="background: rgba(15, 168, 143, 0.08); border: 1.5px solid #0FA88F; border-radius: 18px; padding: 36px 24px; text-align: center; color: #221D15; animation: fadeIn .4s ease;">
-                <div style="width: 56px; height: 56px; border-radius: 50%; background: #0FA88F; color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 28px; font-weight: bold; margin-bottom: 16px; box-shadow: 0 6px 18px rgba(15,168,143,0.3);">✓</div>
-                <h3 style="font-family: 'Fraunces', Georgia, serif; font-size: 24px; font-weight: 700; color: #221D15; margin: 0 0 10px;">Free Draft Request Received!</h3>
-                <p style="font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 15px; color: #6E6557; margin: 0 0 24px; line-height: 1.6;">
+              <div style="background: rgba(15, 168, 143, 0.08); border: 1.5px solid #0FA88F; border-radius: 18px; padding: 32px 20px; text-align: center; color: #221D15; animation: fadeIn .4s ease;">
+                <div style="width: 54px; height: 54px; border-radius: 50%; background: #0FA88F; color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 26px; font-weight: bold; margin-bottom: 14px; box-shadow: 0 6px 18px rgba(15,168,143,0.3);">✓</div>
+                <h3 style="font-family: 'Fraunces', Georgia, serif; font-size: 22px; font-weight: 700; color: #221D15; margin: 0 0 10px;">Free Draft Request Received!</h3>
+                <p style="font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 14.5px; color: #6E6557; margin: 0 0 20px; line-height: 1.55;">
                   Thank you! Alex Morgan and our engineering team will build your custom draft site and send your live preview within 24 hours.
                 </p>
-                <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 8px; background: #0FA88F; color: #ffffff; padding: 13px 26px; border-radius: 9999px; text-decoration: none; font-weight: 600; font-size: 14.5px; transition: transform .2s ease; box-shadow: 0 4px 14px rgba(15,168,143,0.35);">
-                  <span>Chat with Alex on WhatsApp</span>
-                  <span style="font-size: 16px;">→</span>
-                </a>
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+                  <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 8px; background: #0FA88F; color: #ffffff; padding: 12px 24px; border-radius: 9999px; text-decoration: none; font-weight: 600; font-size: 14px; transition: transform .2s ease; box-shadow: 0 4px 14px rgba(15,168,143,0.35);">
+                    <span>Chat with Alex on WhatsApp</span>
+                    <span style="font-size: 15px;">→</span>
+                  </a>
+                  <button type="button" onclick="document.getElementById('draftModal')?.close()" style="background: transparent; border: 1px solid #C4BCB0; color: #6E6557; padding: 8px 18px; border-radius: 9999px; font-size: 13px; font-weight: 600; cursor: pointer; margin-top: 4px;">
+                    Close Window
+                  </button>
+                </div>
               </div>
             `;
           } else {
@@ -275,5 +280,125 @@
         }
       });
     });
+
+    // 10. Free Draft Floating Action Button (FAB) & Modal Controller
+    const draftModal = document.getElementById('draftModal');
+    const modalScrollBox = draftModal?.querySelector('.draft-modal-box');
+    const openDraftTriggers = document.querySelectorAll('[data-open-draft-modal], #draftFabBtn');
+    const closeDraftBtn = document.getElementById('closeDraftModal');
+
+    if (draftModal) {
+      function stopMainScroll() {
+        document.documentElement.classList.add('modal-open');
+        document.body.classList.add('modal-open');
+        if (window.__lenis && typeof window.__lenis.stop === 'function') {
+          window.__lenis.stop();
+        }
+        if (window.lenis && typeof window.lenis.stop === 'function') {
+          window.lenis.stop();
+        }
+      }
+
+      function startMainScroll() {
+        document.documentElement.classList.remove('modal-open');
+        document.body.classList.remove('modal-open');
+        if (window.__lenis && typeof window.__lenis.start === 'function') {
+          window.__lenis.start();
+        }
+        if (window.lenis && typeof window.lenis.start === 'function') {
+          window.lenis.start();
+        }
+      }
+
+      function openDraftModal() {
+        if (typeof draftModal.showModal === 'function') {
+          draftModal.showModal();
+          stopMainScroll();
+          if (modalScrollBox) {
+            modalScrollBox.scrollTop = 0;
+          }
+        }
+      }
+
+      function closeDraftModal() {
+        draftModal.close();
+        startMainScroll();
+      }
+
+      // Global click interceptor: ANY button or link that triggers the draft form
+      document.addEventListener('click', function (e) {
+        const trigger = e.target.closest('a, button, [role="button"]');
+        if (!trigger) return;
+
+        // Ignore clicks inside the modal itself (e.g. submit button or close button)
+        if (draftModal.contains(trigger)) return;
+
+        const href = trigger.getAttribute('href') || '';
+        const text = (trigger.textContent || '').trim().toLowerCase();
+        const isOpenTrigger =
+          trigger.hasAttribute('data-open-draft-modal') ||
+          trigger.id === 'draftFabBtn' ||
+          href === '#free-draft' ||
+          href.endsWith('/#free-draft') ||
+          href.endsWith('#free-draft') ||
+          text.includes('get my free draft') ||
+          text.includes('request free draft') ||
+          text.includes('get free draft') ||
+          trigger.classList.contains('fb4-btn') ||
+          trigger.classList.contains('draft-primary-cta-btn') ||
+          trigger.classList.contains('sn-mobile-cta-btn');
+
+        if (isOpenTrigger) {
+          e.preventDefault();
+          e.stopPropagation();
+          openDraftModal();
+        }
+      });
+
+      if (closeDraftBtn) {
+        closeDraftBtn.addEventListener('click', closeDraftModal);
+      }
+
+      // Check hash on page load and on hashchange
+      if (window.location.hash === '#free-draft') {
+        setTimeout(openDraftModal, 350);
+      }
+      window.addEventListener('hashchange', () => {
+        if (window.location.hash === '#free-draft') {
+          openDraftModal();
+        }
+      });
+
+      draftModal.addEventListener('close', () => {
+        startMainScroll();
+      });
+
+      // Stop wheel and touch events inside the dialog from propagating to window (Lenis)
+      draftModal.addEventListener('wheel', (e) => {
+        e.stopPropagation();
+      }, { passive: false });
+
+      draftModal.addEventListener('touchmove', (e) => {
+        e.stopPropagation();
+      }, { passive: false });
+
+      // Light-dismiss fallback for browsers without closedby support
+      if (!('closedBy' in HTMLDialogElement.prototype)) {
+        draftModal.addEventListener('click', (event) => {
+          if (event.target !== draftModal) return;
+          const rect = draftModal.getBoundingClientRect();
+          const isDialogContent = (
+            rect.top <= event.clientY &&
+            event.clientY <= rect.top + rect.height &&
+            rect.left <= event.clientX &&
+            event.clientX <= rect.left + rect.width
+          );
+          if (!isDialogContent) {
+            closeDraftModal();
+          }
+        });
+      }
+    }
   });
 })();
+
