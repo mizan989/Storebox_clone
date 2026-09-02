@@ -1,0 +1,16 @@
+{
+  "name": "storebox",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Storebox — Done-for-you website in 24 hours",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "serve": "npx serve ."
+  },
+  "devDependencies": {
+    "vite": "^5.4.10"
+  }
+}

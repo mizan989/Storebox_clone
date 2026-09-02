@@ -1,0 +1,554 @@
+/* ============================================================
+   Storebox brand theme tokens — v1 (2026-07)
+   Source of truth: storebox-home-v2.html
+   Fonts (Google Fonts):
+     Fraunces:ital,opsz,wght@0,9..144,500..900;1,9..144,500..900
+     Bricolage+Grotesque:opsz,wght@12..96,400..800
+   ============================================================ */
+
+:root{
+  /* ---- typography ---- */
+  --fh:'Fraunces',Georgia,serif;                    /* display only: h1/h2/h3, big numbers.
+                                                       weight 750, letter-spacing -.015em */
+  --fb:'Bricolage Grotesque',system-ui,sans-serif;  /* everything else: body, UI, buttons */
+
+  /* ---- primary orange ramp ---- */
+  --orange-50:#FFF3EC;  --orange-100:#FFE4D2; --orange-200:#FFC8A4;
+  --orange-300:#FFA470; --orange-400:#FF8749; --orange-500:#FF6B2C;
+  --orange-600:#EE5715; --orange-700:#C6440E; --orange-800:#9C3610;
+  --orange-900:#7C2D12; --orange-950:#431407;
+
+  /* ---- brand accents ---- */
+  --a1:#FFA149;                                     /* sunset: light stop */
+  --a2:#FF6B2C;                                     /* THE brand orange (primary) */
+  --a3:#E9384D;                                     /* sunset: red stop */
+  --grad-sunset:linear-gradient(100deg,var(--a1),var(--a2) 45%,var(--a3) 90%);
+  --grad-btn:linear-gradient(100deg,var(--a1),var(--a2) 60%,#F5522F);
+  --glow:rgba(255,107,44,.4);                       /* shadow color under orange elements */
+  --amber:#FFC53D;                                  /* tiny highlights only (stars) */
+  --red:#E5484D;                                    /* errors only */
+
+  /* ---- structural constants ---- */
+  --paper:#FAF7F1;                                  /* cream canvas (also dark-mode text) */
+  --ink:#221D15;                                    /* warm near-black; text on orange fills */
+  --bg:#171310;                                     /* espresso page bg */
+  --bg2:#1E1915;                                    /* espresso alt bg */
+  --maxw:1160px;
+  --r:20px;                                         /* card radius; pills are 999px */
+}
+
+/* ---- theme scopes ----------------------------------------------------
+   Every <section> gets .lt (cream) or .dk (espresso); the page alternates.
+   Components consume ONLY the scoped vars below (--text/--muted/--line/
+   --surface/--ita/--teal) so they re-theme automatically.
+   .dkscope re-darkens a mockup (browser frame, chat UI) inside a .lt
+   section without changing the section background.
+------------------------------------------------------------------------ */
+
+.dk, .dkscope{
+  --text:#FAF7F1;
+  --muted:#A99E8F;
+  --line:rgba(250,240,225,.11);        /* hairline border */
+  --surface:rgba(250,240,225,.045);    /* card fill tint */
+  --ita:#FF8749;                       /* italic headline accent = orange-400 */
+  --teal:#2BD4BD;                      /* success / live / ticks */
+  color:var(--text);
+}
+.dk{ background:var(--bg); }
+
+.lt{
+  --text:#221D15;
+  --muted:#6E6557;
+  --line:rgba(34,29,21,.15);
+  --surface:rgba(34,29,21,.05);
+  --ita:#F0591E;                       /* deeper orange for contrast on cream */
+  --teal:#0FA88F;                      /* deeper teal for contrast on cream */
+  background:var(--paper); color:var(--text);
+}
+
+/* ---- usage rules (enforced by convention) -----------------------------
+1  Headlines: font-family var(--fh); accent words as
+   <em class="ita"> → font-style:italic; color:var(--ita).
+2  Primary button: background var(--grad-btn); color var(--ink);
+   border-radius 999px; box-shadow 0 12px 40px var(--glow).
+   Ghost button: transparent bg, 1px solid var(--line), color var(--text).
+   Ink button (on cream cards): background var(--ink), color var(--paper).
+3  Text links: var(--orange-700) on cream, var(--orange-400) on dark.
+   Never orange-500 for text below ~24px (contrast).
+4  var(--grad-sunset) is for hero headline moments and giant numbers only.
+5  Teal is the "alive" color: live dots, success ticks, #1 badges,
+   confirmations. Amber only for star ratings. Red only for errors.
+6  White (#fff) cards appear only inside .lt sections
+   (shadow: 0 20px 50px rgba(34,29,21,.1)).
+7  Dark section CTAs/forms: keep the card cream (self-scoped) so the form
+   pops; finale pattern = .dk section + cream card + ink button.
+------------------------------------------------------------------------ */
+
+/* ============================================================
+   Shared base + components — identical across every sb-mktg page.
+   Link this file, then keep only page-unique CSS inline. Load
+   order matters: this file first, then the page's own <style>,
+   so page-specific overrides (e.g. a taller .sec on one page)
+   still win via normal cascade order.
+   ============================================================ */
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:#FAF7F1;font-family:var(--fb);
+  -webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+/* ---- sleek ultra-thin scrollbar ---- */
+html, body, * {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 107, 44, 0.45) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 107, 44, 0.45);
+  border-radius: 999px;
+  transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 107, 44, 0.85);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: #FF6B2C;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+h1,h2,h3{margin:0;font-family:var(--fh);letter-spacing:-.015em;line-height:1.08;font-weight:750}
+.ita{font-style:italic;color:var(--ita);font-weight:640}
+p{margin:0;line-height:1.65;color:var(--muted)}
+a{color:inherit;text-decoration:none}
+img{max-width:100%}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+.grad{background:var(--grad-sunset);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+.eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:12px;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--muted);
+  padding:8px 15px;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
+.eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--teal);box-shadow:0 0 12px var(--teal)}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5em;font-weight:700;
+  font-size:16px;border:0;cursor:pointer;padding:15px 26px;border-radius:999px;color:var(--ink);
+  font-family:var(--fb);background:var(--grad-btn);
+  box-shadow:0 12px 40px var(--glow);transition:box-shadow .25s;will-change:transform}
+.btn:hover{box-shadow:0 18px 54px rgba(255,107,44,.6)}
+.btn.ghost{background:var(--surface);border:1.5px solid var(--line);box-shadow:none;color:var(--text)}
+.dk .btn.ghost,.dkscope .btn.ghost{border-color:rgba(250,240,225,.35)}
+.lt .btn.ghost{border-color:rgba(34,29,21,.28)}
+.btn.inkbtn{background:#221D15;color:#FAF7F1;box-shadow:0 14px 44px rgba(34,29,21,.35)}
+
+.chip{font-size:13px;font-weight:600;color:var(--text);padding:8px 14px;border-radius:999px;
+  border:1px solid var(--line);background:var(--surface);display:inline-flex;align-items:center;gap:7px}
+.chip .tick{color:var(--teal);font-weight:800}
+
+.sec{padding:100px 0;position:relative}
+.sec-head{max-width:760px;margin:0 auto 52px;text-align:center}
+.sec-head h2{font-size:clamp(30px,4.4vw,48px);margin:18px 0 16px}
+.sec-head p{font-size:16.5px}
+.sec-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:36px}
+.sec-actions.tight{justify-content:flex-start;margin-top:20px}
+
+.grain{position:fixed;inset:0;z-index:80;pointer-events:none;opacity:.045;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:.4;pointer-events:none}
+.blob.b1{width:520px;height:520px;background:#5A2612;top:-160px;right:-120px}
+.blob.b2{width:420px;height:420px;background:#521426;bottom:-180px;left:-140px}
+
+.rv{opacity:0; transform:translateY(24px); transition:opacity 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1)}
+.rv.is-revealed{opacity:1; transform:translateY(0)}
+@media (prefers-reduced-motion: reduce){.rv{opacity:1; transform:none}}
+
+/* ============================================================
+   GLOBAL TOP SCROLL READING PROGRESS BAR
+   ============================================================ */
+.sn-scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 99999;
+  pointer-events: none;
+  background: transparent;
+}
+.sn-scroll-progress-bar {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, #FFA149, #FF6B2C 50%, #E9384D);
+  transform-origin: 0% 50%;
+  transform: scaleX(0);
+  box-shadow: 0 0 10px rgba(255, 107, 44, 0.6);
+  will-change: transform;
+}
+
+/* ============================================================
+   HIGH-CONTRAST FROSTED GLASS NAVBAR (STATE-OF-THE-ART UI)
+   ============================================================ */
+.css-p2lvsv {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 1100 !important;
+  width: 100% !important;
+  transform: translate3d(0, 0, 0) !important;
+  -webkit-transform: translate3d(0, 0, 0) !important;
+  backface-visibility: hidden !important;
+  -webkit-backface-visibility: hidden !important;
+  isolation: isolate !important;
+}
+
+.css-p2lvsv header,
+header.MuiAppBar-root {
+  background: #14110E !important;
+  background: rgba(18, 15, 12, 0.96) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border-bottom: 1px solid rgba(250, 240, 225, 0.1) !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4) !important;
+  outline: none !important;
+  contain: paint !important;
+  transform: translate3d(0, 0, 0) !important;
+  -webkit-transform: translate3d(0, 0, 0) !important;
+  backface-visibility: hidden !important;
+  -webkit-backface-visibility: hidden !important;
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.css-p2lvsv.is-scrolled header,
+.css-p2lvsv.scrolled header,
+header.MuiAppBar-root.is-scrolled {
+  background: #100D0A !important;
+  background: rgba(14, 11, 8, 0.98) !important;
+  backdrop-filter: blur(24px) saturate(200%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(200%) !important;
+  border-bottom: 1px solid rgba(255, 107, 44, 0.25) !important;
+  box-shadow: 0 10px 36px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Hide duplicate measurement ghost element to prevent hover seams */
+.css-1hzfgad {
+  display: none !important;
+}
+
+/* Logo in header */
+.css-p2lvsv header a.css-1n8ljdl h4,
+.css-p2lvsv header h4.css-1tdbeyw,
+header.MuiAppBar-root h4 {
+  color: #FAF7F1 !important;
+  font-family: 'Fraunces', Georgia, serif !important;
+  font-weight: 750 !important;
+  letter-spacing: -0.015em !important;
+  transition: color 0.2s ease, text-shadow 0.2s ease !important;
+}
+.css-p2lvsv header a.css-1n8ljdl:hover h4 {
+  color: #FF8749 !important;
+  text-shadow: 0 0 14px rgba(255, 107, 44, 0.4) !important;
+}
+
+/* Nav links in header - pure color/bg transition without transform to prevent GPU line tearing */
+.css-p2lvsv header a.css-pz5ynn,
+.css-p2lvsv header .css-1abmugc a.css-pz5ynn,
+header.MuiAppBar-root a.MuiButton-textPrimary {
+  color: #FAF7F1 !important;
+  font-family: 'Bricolage Grotesque', system-ui, sans-serif !important;
+  font-weight: 500 !important;
+  font-size: 15px !important;
+  padding: 7px 16px !important;
+  border-radius: 999px !important;
+  text-decoration: none !important;
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  transform: none !important;
+  transition: color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease !important;
+}
+.css-p2lvsv header a.css-pz5ynn:hover,
+.css-p2lvsv header .css-1abmugc a.css-pz5ynn:hover,
+header.MuiAppBar-root a.MuiButton-textPrimary:hover {
+  color: #FF8749 !important;
+  background-color: rgba(255, 107, 44, 0.15) !important;
+  box-shadow: 0 0 14px rgba(255, 107, 44, 0.2) !important;
+  transform: none !important;
+}
+
+/* "Get My Free Draft" Primary CTA - lighting transition without layer jitter */
+.css-p2lvsv header a.css-a98w6z,
+.css-p2lvsv header a.MuiButton-containedPrimary,
+header.MuiAppBar-root a.MuiButton-containedPrimary {
+  background: linear-gradient(100deg, #FFA149, #FF6B2C 60%, #F5522F) !important;
+  color: #171310 !important;
+  font-family: 'Bricolage Grotesque', system-ui, sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 14.5px !important;
+  padding: 9.5px 22px !important;
+  border-radius: 999px !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: 0 4px 20px rgba(255, 107, 44, 0.4) !important;
+  transform: none !important;
+  transition: filter 0.2s ease, box-shadow 0.2s ease !important;
+}
+.css-p2lvsv header a.css-a98w6z:hover,
+.css-p2lvsv header a.MuiButton-containedPrimary:hover,
+header.MuiAppBar-root a.MuiButton-containedPrimary:hover {
+  filter: brightness(1.08) !important;
+  box-shadow: 0 8px 30px rgba(255, 107, 44, 0.6) !important;
+  transform: none !important;
+}
+
+/* ============================================================
+   HAMBURGER TO CROSS (X) ICON ANIMATION (MOBILE ONLY)
+   ============================================================ */
+@media (min-width: 900px) {
+  button[aria-label="Open menu"],
+  .css-1f5scab,
+  .css-1sxm972,
+  .sn-mobile-drawer {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+}
+
+@media (max-width: 899px) {
+  button[aria-label="Open menu"],
+  .css-1f5scab {
+    position: relative !important;
+    width: 42px !important;
+    height: 42px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 50% !important;
+    border: 1px solid rgba(250, 240, 225, 0.15) !important;
+    background: rgba(250, 240, 225, 0.08) !important;
+    color: #FAF7F1 !important;
+    cursor: pointer !important;
+    padding: 0 !important;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    outline: none !important;
+  }
+
+  button[aria-label="Open menu"]:hover,
+  .css-1f5scab:hover {
+    background: rgba(255, 107, 44, 0.18) !important;
+    border-color: rgba(255, 107, 44, 0.45) !important;
+    color: #FF8749 !important;
+    transform: scale(1.05);
+  }
+
+  button[aria-label="Open menu"] svg,
+  .css-1f5scab svg {
+    width: 22px !important;
+    height: 22px !important;
+    stroke: currentColor !important;
+  }
+
+  /* Morph paths to cross */
+  button[aria-label="Open menu"] path,
+  .css-1f5scab path {
+    transition: opacity 0.25s ease, transform 0.25s ease !important;
+    transform-origin: center center !important;
+  }
+
+  button[aria-label="Open menu"] line,
+  .css-1f5scab line {
+    transition: opacity 0.25s ease, transform 0.25s ease !important;
+    transform-origin: center center !important;
+  }
+
+  button[aria-label="Open menu"][aria-expanded="true"] path,
+  button[aria-label="Open menu"].is-open path,
+  .css-1f5scab[aria-expanded="true"] path,
+  .css-1f5scab.is-open path {
+    opacity: 0 !important;
+    transform: scale(0.6) !important;
+  }
+
+  button[aria-label="Open menu"][aria-expanded="true"] line,
+  button[aria-label="Open menu"].is-open line,
+  .css-1f5scab[aria-expanded="true"] line,
+  .css-1f5scab.is-open line {
+    opacity: 1 !important;
+    transform: scale(1) !important;
+  }
+}
+
+/* ============================================================
+   MOBILE DRAWER & ANIMATIONS
+   ============================================================ */
+.sn-mobile-drawer {
+  position: fixed;
+  top: 64px;
+  left: 0;
+  right: 0;
+  max-height: calc(100vh - 64px);
+  overflow-y: auto;
+  background: rgba(18, 15, 12, 0.98);
+  backdrop-filter: blur(24px) saturate(190%);
+  -webkit-backdrop-filter: blur(24px) saturate(190%);
+  border-bottom: 1px solid rgba(255, 107, 44, 0.25);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-16px);
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              visibility 0.3s ease;
+  pointer-events: none;
+  z-index: 1099;
+}
+
+@media (min-width: 900px) {
+  .sn-mobile-drawer {
+    display: none !important;
+  }
+}
+
+.sn-mobile-drawer.is-open {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translateY(0) !important;
+  pointer-events: auto !important;
+}
+
+.sn-mobile-drawer-content {
+  padding: 20px 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.sn-mobile-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sn-mobile-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border-radius: 14px;
+  color: #FAF7F1 !important;
+  text-decoration: none;
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  background: rgba(250, 240, 225, 0.03);
+  border: 1px solid rgba(250, 240, 225, 0.06);
+  transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.sn-mobile-link .sn-arrow {
+  color: #FF8749;
+  font-size: 1.1rem;
+  transition: transform 0.2s ease;
+}
+
+.sn-mobile-link:hover,
+.sn-mobile-link:active {
+  background: rgba(255, 107, 44, 0.12);
+  border-color: rgba(255, 107, 44, 0.35);
+  color: #FF8749 !important;
+  transform: translateX(4px);
+}
+
+.sn-mobile-link:hover .sn-arrow {
+  transform: translateX(3px);
+}
+
+.sn-mobile-drawer-cta {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(250, 240, 225, 0.08);
+}
+
+.sn-mobile-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 15px 24px;
+  border-radius: 9999px;
+  background: linear-gradient(100deg, #FFA149, #FF6B2C 60%, #F5522F);
+  color: #171310 !important;
+  font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+  font-weight: 750;
+  font-size: 1rem;
+  text-decoration: none;
+  box-shadow: 0 6px 24px rgba(255, 107, 44, 0.4);
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.sn-mobile-cta-btn:active {
+  transform: scale(0.98);
+}
+
+.sn-mobile-socials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* ============================================================
+   ANIMATE UI & INTERACTIVE MICRO-POLISH
+   ============================================================ */
+/* Magnetic & subtle lift on cards */
+.pcard, .t-card, .who-card, .plan-card, .sb-card, .feature-card {
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease !important;
+}
+.pcard:hover, .t-card:hover, .who-card:hover, .plan-card:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.32) !important;
+}
+
+/* Social pills hover polish */
+.sn-social-pill {
+  transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease !important;
+}
+.sn-social-pill:hover {
+  transform: translateY(-2px) !important;
+  background: rgba(250, 240, 225, 0.1) !important;
+  border-color: rgba(255, 107, 44, 0.4) !important;
+  box-shadow: 0 4px 16px rgba(255, 107, 44, 0.2) !important;
+}
+
+/* Interactive button spring */
+.btn:active, .sb-btn:active, .sn-social-pill:active {
+  transform: scale(0.97) !important;
+}
+
+/* Smooth Accordions */
+.qa .qa-a {
+  transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease !important;
+}
+.qa.open .qa-ico {
+  transform: rotate(180deg) !important;
+}
+.qa .qa-ico {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
