@@ -1,6 +1,6 @@
 # Storebox Clone — Done-For-You Website, SEO & AEO Platform
 
-[![Live Demo](https://img.shields.io/badge/demo-online-brightgreen.svg)](https://github.com/mizan989/Storebox_clone)
+[![Live Demo](https://img.shields.io/badge/demo-online-brightgreen.svg)](https://storebox-clone.vercel.app/)
 [![Vite](https://img.shields.io/badge/Vite-5.4-646CFF?logo=vite)](https://vitejs.dev/)
 [![JavaScript](https://img.shields.io/badge/JavaScript-ES2022-F7DF1E?logo=javascript)](https://developer.mozilla.org/)
 [![GSAP](https://img.shields.io/badge/GSAP-3.12_ScrollTrigger-88CE02?logo=greensock)](https://greensock.com/gsap/)
@@ -13,8 +13,8 @@ A high-fidelity, cinema-grade recreation of the **Storebox** digital marketing a
 
 ## Live Demo
 
-Explore the repository and live demonstration:
-**[https://github.com/mizan989/Storebox_clone](https://github.com/mizan989/Storebox_clone)**
+Experience the live application deployed on Vercel:
+**[https://storebox-clone.vercel.app/](https://storebox-clone.vercel.app/)**
 
 ---
 
