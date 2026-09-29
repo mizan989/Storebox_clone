@@ -76,9 +76,11 @@ Built on modern vanilla web standards with **Vite 5.4**, the platform combines c
 ## UI Preview
 
 <p align="center">
-  <img src="./public/assets/media/clouse-hall-cpa-laptop.png" alt="Storebox Client Showcase - Clouse & Hall CPA" width="48%" />
-  &nbsp;
-  <img src="./public/assets/media/hero-adrian-supermarket.png" alt="Storebox Client Showcase - Adrian Supermarket" width="48%" />
+  <img src="./assets/preview-hero.png" alt="Storebox Pinned Hero & Film Stage Preview" width="100%" />
+</p>
+
+<p align="center">
+  <img src="./assets/preview-search.png" alt="Storebox Dual Search & AEO Engine Preview" width="100%" />
 </p>
 
 ---
@@ -256,6 +258,9 @@ window.__THEME_V2__ = {
 
 ```text
 Storebox_clone/
+├── assets/                            # High-resolution UI preview screenshots for documentation
+│   ├── preview-hero.png               # Pinned film hero & interactive stage preview
+│   └── preview-search.png             # SEO & AEO dual search comparison preview
 ├── index.html                         # Core landing page (Hero film, proof marquee, FAQ, modal)
 ├── pricing.html                       # Transparent pricing breakdown & feature comparison matrix
 ├── ecommerce.html                     # Done-for-you e-commerce & storefront showcase
@@ -288,6 +293,8 @@ Storebox_clone/
 │           ├── clouse-hall-cpa-laptop.png # Client portfolio mockup
 │           ├── duval-notry-laptop.png     # Client portfolio mockup
 │           ├── hero-adrian-supermarket.png# Client portfolio mockup
+│           ├── hero-pho-60.png        # Client portfolio mockup
+│           ├── icnj-insurance-laptop.png  # Client portfolio mockup
 │           └── vero-cleaning-laptop.png   # Client portfolio mockup
 │
 └── dist/                              # High-performance compiled production bundle (< 500ms build)
